@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RailMat
+  m_Name: RailMat3
   m_Shader: {fileID: -6465566751694194690, guid: 56b8d28c82d6c5440bcbfe151dde87d9,
     type: 3}
   m_ShaderKeywords: 
@@ -76,7 +76,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_B40D2B85: {r: 0.3537736, g: 0.75709254, b: 1, a: 0}
+    - Color_B40D2B85: {r: 1, g: 0.74475396, b: 0.35294116, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
