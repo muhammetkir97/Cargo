@@ -8,7 +8,7 @@ public class Globals : MonoBehaviour
 
     [SerializeField] private GameObject LevelParent;
 
-    int CurrentLevel = 1;
+    int CurrentLevel = 0;
 
     float BaseRailSpeed = 1f;
     float RailSpeedMultiplier = 1.02f;

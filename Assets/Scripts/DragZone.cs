@@ -37,11 +37,11 @@ public class DragZone : MonoBehaviour, IDragHandler,IEndDragHandler,IBeginDragHa
 
             if(direction < 0)
             {
-                direction = -1;
+                direction = 1;
             }
             else
             {
-                direction = 1;
+                direction = -1;
             }
 
             SelectedPosition.x = 0;
