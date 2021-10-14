@@ -6,15 +6,23 @@ public class Globals : MonoBehaviour
 {
     public static Globals Instance;
 
+    [SerializeField] private GameObject LevelParent;
+
+    int CurrentLevel = 1;
+
+    float BaseRailSpeed = 1f;
+    float RailSpeedMultiplier = 1.02f;
+
+    float BaseMoverSpeed = 3f;
+    float MoverSpeedMultiplier = 1.02f;
+
+
     void Awake()
     {
         Instance = this;
     }
 
-    int CurrentLevel = 0;
 
-    float BaseRailSpeed = 1f;
-    float RailSpeedMultiplier = 1.02f;
 
     public int GetCurrentLevel()
     {
@@ -37,6 +45,33 @@ public class Globals : MonoBehaviour
     public float GetObjectSpeed()
     {
         return GetRailSpeed() * 2;
+    }
+
+    public float GetMoverSpeed()
+    {
+        float speed = BaseMoverSpeed;
+        int level = GetCurrentLevel();
+
+        for(int i=0; i<level; i++)
+        {
+            speed = speed * MoverSpeedMultiplier;
+        }
+
+        return speed;
+    }
+
+    public Transform[] GetLevelPositions()
+    {
+        int level = GetCurrentLevel();
+        List<Transform> positions = new List<Transform>();
+        Transform selectedLevel = LevelParent.transform.GetChild(level);
+
+        for(int i=0; i<selectedLevel.childCount; i++)
+        {
+            positions.Add(selectedLevel.GetChild(i));
+        }
+
+        return positions.ToArray();
     }
 
 

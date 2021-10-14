@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MoverObject : MonoBehaviour
 {
+    [SerializeField] private PoolController MoverPool;
     BoxCollider ObjectCollider;
     Vector3 Pos1,Pos2,TargetPos;
     bool Status = false;
     float Speed = 0;
+    float MoverSpeed = 0;
     int Direction = 0;
     bool IsChangeDirection = false;
     Vector3 Dir = Vector3.zero;
@@ -20,9 +22,11 @@ public class MoverObject : MonoBehaviour
 
     void Start()
     {
+        
         ObjectCollider = transform.GetComponent<BoxCollider>();
         ObjectCollider.enabled = false;
         Speed = Globals.Instance.GetObjectSpeed();
+        MoverSpeed = Globals.Instance.GetMoverSpeed();
     }
 
     // Update is called once per frame
@@ -39,12 +43,24 @@ public class MoverObject : MonoBehaviour
 
             if(IsChangeDirection)
             {
-                transform.Translate(Dir * Speed * Time.deltaTime);
+                transform.Translate(Dir * MoverSpeed * Time.deltaTime);
 
-                if(Mathf.Abs(TargetPos.x - transform.position.x) < 0.05f)
+                float distance = 0;
+
+                if(TargetPos.x < 0)
+                {
+                    distance = transform.position.x - TargetPos.x;
+                }
+                else
+                {
+                    distance = TargetPos.x - transform.position.x;
+                }
+
+                if(distance <= 0)
                 {
                     IsChangeDirection = false;
                     ObjectCollider.enabled = false;
+                    transform.position  = new Vector3(TargetPos.x,transform.position.y,transform.position.z);
                     if(Direction == 1)
                     {
                         Direction = -1;
@@ -56,6 +72,11 @@ public class MoverObject : MonoBehaviour
                 } 
 
                
+            }
+
+            if(transform.position.z > GameSystem.Instance.GetEndPosition().z)
+            {
+                MoverPool.AddToPool(gameObject);
             }
         }
     }
@@ -90,7 +111,13 @@ public class MoverObject : MonoBehaviour
         Pos2 = pos2;
     }
 
-    public void ChangeDirection()
+    public void ChangeDirection(float delay)
+    {
+        if(!IsChangeDirection) Invoke("LateChangeDirection",delay);
+        
+    }
+
+    void LateChangeDirection()
     {
         Dir = Vector3.right;
         TargetPos = Pos1;
@@ -101,9 +128,7 @@ public class MoverObject : MonoBehaviour
             TargetPos = Pos2;
         }
         
-         ObjectCollider.enabled = true;
+        ObjectCollider.enabled = true;
         IsChangeDirection = true;
-
-
     }
 }

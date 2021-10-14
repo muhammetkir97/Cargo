@@ -44,6 +44,9 @@ public class DragZone : MonoBehaviour, IDragHandler,IEndDragHandler,IBeginDragHa
                 direction = 1;
             }
 
+            SelectedPosition.x = 0;
+            SelectedPosition.y = 0; 
+
             GameSystem.Instance.ChangeMoverDirection(SelectedPosition,(int)direction);
         }
 

@@ -13,7 +13,7 @@ public class PoolController : MonoBehaviour
     {
         for(int i=0; i<PoolSize; i++)
         {
-            GameObject clone = Instantiate(PoolObject,transform.position,Quaternion.identity);
+            GameObject clone = Instantiate(PoolObject,transform.position,PoolObject.transform.rotation);
             clone.transform.SetParent(transform);
             PoolStack.Push(clone);
         }

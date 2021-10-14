@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class RailObject : MonoBehaviour
 {
+    [SerializeField] private int Category = -1;
     Rigidbody ObjectRigidbody;
     bool Status;
     Vector3 LastMoveDirection;
     float Speed;
+    Outline OutlineScript;
+    int SelectedColor = -1;
+
+    Quaternion StartAngle;
 
     void Awake()
     {
-        Speed = Globals.Instance.GetObjectSpeed();
-        ObjectRigidbody = transform.GetComponent<Rigidbody>();
+
 
     }
     void Start()
     {
-        
+        StartAngle = transform.rotation;
+        OutlineScript = transform.GetComponent<Outline>();
+        Speed = Globals.Instance.GetObjectSpeed();
+        ObjectRigidbody = transform.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -65,7 +72,9 @@ public class RailObject : MonoBehaviour
     {
         if(status)
         {
+            InitSettings();
             ObjectRigidbody.isKinematic = false;
+            
         }
         else
         {
@@ -73,5 +82,32 @@ public class RailObject : MonoBehaviour
         }
 
         Status = status;
+    }
+
+    void InitSettings()
+    {
+        transform.rotation = StartAngle;
+        ObjectRigidbody.velocity = Vector3.zero;
+        ObjectRigidbody.angularVelocity = Vector3.zero;
+
+        Color[] colors = GameSystem.Instance.GetColors();
+        SelectedColor = Random.Range(0,colors.GetLength(0));
+        OutlineScript.OutlineColor = colors[SelectedColor];
+    }
+
+    public int GetObjectColor()
+    {
+        return SelectedColor;
+    }
+
+    public int GetCategory()
+    {
+        return Category;
+    }
+
+    public void SendToPool()
+    {
+        
+        GameSystem.Instance.GetPoolController(Category).AddToPool(gameObject);
     }
 }
