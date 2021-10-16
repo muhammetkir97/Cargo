@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RailMat1
-  m_Shader: {fileID: -6465566751694194690, guid: 56b8d28c82d6c5440bcbfe151dde87d9,
+  m_Name: Alt
+  m_Shader: {fileID: -6465566751694194690, guid: 568a56c84b64e43469b06acd9f2759ee,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,10 +20,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_970B8DFE:
-        m_Texture: {fileID: 2800000, guid: 085469693f3d2e845a074554f7f4e8c3, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -53,7 +49,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_CCDBA678: 0.1
+    - Vector1_5246AA5D: 4
+    - Vector1_A0BEB753: 0
+    - Vector1_ED9A46CC: 0.625
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -76,12 +74,16 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_B40D2B85: {r: 0.35294116, g: 1, b: 0.48464465, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - Color_128B3F85: {r: 1, g: 1, b: 1, a: 0}
+    - Color_2A4B2485: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 0}
+    - Color_8159753D: {r: 0.115566045, g: 0.28492117, b: 0.46226418, a: 0}
+    - Color_A75D37D2: {r: 0, g: 0, b: 0, a: 0}
+    - Color_CFD2EF7E: {r: 8, g: 8, b: 8, a: 0}
+    - _BaseColor: {r: 0.19437523, g: 0.42197955, b: 0.4528302, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
---- !u!114 &4062927084708715987
+--- !u!114 &5078435867679331717
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
