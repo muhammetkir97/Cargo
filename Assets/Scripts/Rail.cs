@@ -24,11 +24,11 @@ public class Rail : MonoBehaviour
 
         if(tempObject.GetObjectColor() == ColorNumber)
         {
-            Debug.Log("dogru");
+            GameSystem.Instance.CargoStatus(true);
         }
         else
         {
-           Debug.Log("yanlış"); 
+           GameSystem.Instance.CargoStatus(false);
         }
         DetectedObject = other.transform.gameObject;
         Invoke("DeleteObject",3);

@@ -8,13 +8,16 @@ public class Globals : MonoBehaviour
 
     [SerializeField] private GameObject LevelParent;
 
-    int CurrentLevel = 1;
+    int CurrentLevel = 0;
 
     float BaseRailSpeed = 1f;
     float RailSpeedMultiplier = 1.02f;
 
     float BaseMoverSpeed = 3f;
     float MoverSpeedMultiplier = 1.02f;
+
+    float BaseCargoCount = 20f;
+    float CargoCountMultiplier = 1.1f;
 
 
     void Awake()
@@ -72,6 +75,26 @@ public class Globals : MonoBehaviour
         }
 
         return positions.ToArray();
+    }
+
+    public void SetLevelDecorations()
+    {
+        int level = GetCurrentLevel();
+        int decorationIndex = LevelParent.transform.GetChild(level).childCount-1;
+        LevelParent.transform.GetChild(level).GetChild(decorationIndex).gameObject.SetActive(true);
+    }
+
+    public int GetCargoCount()
+    {
+        float count = BaseCargoCount;
+        int level = GetCurrentLevel();
+
+        for(int i=0; i<level; i++)
+        {
+            count = count * CargoCountMultiplier;
+        }
+
+        return (int)count;
     }
 
 

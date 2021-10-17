@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class GameSystem : MonoBehaviour
 {
     public static GameSystem Instance;
@@ -21,9 +22,20 @@ public class GameSystem : MonoBehaviour
     [SerializeField] private Color[] Colors;
     int MoverCount = 0;
 
+    [Header("UI")]
+    [SerializeField] private Image ProgressBar;
+    [SerializeField] private GameObject[] Stars;
+    [SerializeField] private TextMeshProUGUI LevelText;
+    [SerializeField] private TextMeshProUGUI RemainingText;
+
+    int LevelCargoCount;
+    int RemainingCargoCount;
+    int CorrectCargoCount = 0;
+
 
     void Awake()
     {
+        Application.targetFrameRate = 240;
         Instance = this;
         
     }
@@ -37,6 +49,12 @@ public class GameSystem : MonoBehaviour
         InvokeRepeating("AddMover",0,moverAddSpeed/12f);
 
         CreateLevel();
+
+        LevelCargoCount = Globals.Instance.GetCargoCount();
+        RemainingCargoCount = LevelCargoCount;
+        LevelText.text = $"Level {Globals.Instance.GetCurrentLevel() + 1}";
+        SetGameProgress();
+
     }
 
     void CreateLevel()
@@ -49,6 +67,9 @@ public class GameSystem : MonoBehaviour
             selectedRail.rotation = railPositions[i].rotation;
 
         }
+
+        Globals.Instance.SetLevelDecorations();
+
     }
 
     // Update is called once per frame
@@ -144,4 +165,29 @@ public class GameSystem : MonoBehaviour
     {
         return ObjectPools[category];
     }
+
+    void SetGameProgress()
+    {
+        RemainingText.text = $"{RemainingCargoCount} Left";
+        float ratio = (float)CorrectCargoCount / LevelCargoCount;
+        ProgressBar.fillAmount = ratio;
+
+        for(int i=0; i<3; i++)
+        {
+            if(ratio >= ((i+1)*0.33f))
+            {
+                Stars[i].SetActive(true);
+            }
+        }
+    }
+
+    public void CargoStatus(bool status)
+    {
+        if(status) CorrectCargoCount++;
+        RemainingCargoCount--;
+        SetGameProgress();
+    }
+
+
+ 
 }

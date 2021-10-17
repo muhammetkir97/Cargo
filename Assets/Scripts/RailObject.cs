@@ -50,6 +50,11 @@ public class RailObject : MonoBehaviour
 
             //Vector3 moveDirection = Vector3.forward;
             transform.Translate(moveDirection * Speed * Time.deltaTime);
+
+                if(transform.position.z > GameSystem.Instance.GetEndPosition().z)
+            {
+                SendToPool();
+            }
         }
         
     }
